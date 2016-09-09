@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Online Code Beautifier</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Abhishek Kumar - QletApps.com">
+	<meta name="description" content="With Code Beautifier, you can pretty-print and syntax highlight source code written in JavaScript, HTML, CSS, PHP or other programming languages." />
+	<script>
+	</script>
+	<link href="code/beautify.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="code/lib/codemirror.css">
+	<script src="code/lib/codemirror.js"></script>
+	<script src="code/lib/util/formatting.js"></script>
+	<script src="code/mode/css/css.js"></script>
+	<script src="code/mode/xml/xml.js"></script>
+	<script src="code/mode/javascript/javascript.js"></script>
+	<script src="code/mode/htmlmixed/htmlmixed.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<style>
+		.CodeMirror {
+			border: 1px solid #C0C0C0;
+			height: auto;
+			font-family: 'Source Code Pro', monospace;
+		}
+
+		.CodeMirror-empty {
+			outline: 1px solid #c22;
+		}
+
+		.CodeMirror-empty.CodeMirror-focused {
+			outline: none;
+		}
+
+		.CodeMirror pre.CodeMirror-placeholder {
+			color: #999;
+		}
+	</style>
+	<form class="form-horizontal well">
+		<div class="control-group">
+			<textarea id="code" name="code" placeholder="Copy-paste your source code here.."></textarea>
+		</div>
+		<div class="control-group">
+			<div class="controls2">
+				<a href="#" onclick="autoFormat();return false;" class="btn btn-inverse btn-large"><i class="icon-white icon-camera"></i>Beautify Code</a>
+			</div>
+		</div>
+	</form>
+
+	<script>
+		var content = <%= content  %>;
+
+		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+			lineNumbers: true,
+			lineWrapping: false,
+			viewportMargin: Infinity,
+			autofocus: true,
+			mode: "htmlmixed"
+		});
+
+		function autoFormat() {
+			CodeMirror.commands["selectAll"](editor);
+			editor.autoFormatRange(editor.getCursor(true), editor.getCursor(false));
+			editor.setCursor(0);
+		};
+
+		window.onload=function(){
+			if (content == "null") {
+				document.getElementById("code").value = content;
+				autoFormat();
+			}
+		};
+	</script>
+
+</div>
+</body>
+
+</html>
