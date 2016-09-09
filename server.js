@@ -20,6 +20,8 @@ app.get('/', function(req, res) {
 
 app.post('/viewer', function(req, res) {
 	//res.set('Content-Type', 'application/javascript');
+	res.header("Access-Control-Allow-Origin","*");
+
 	if (req.data && req.data.content) {
 		res.render('index.ejs', { content :req.data.content});
 	} else {
